@@ -14,11 +14,12 @@ namespace CustomListUnitTests
             //arrange
             CustomList<int> c = new CustomList<int>();
             int inputValue = 5;
+            int expectedCount = 1;
             //act
             c.Add(inputValue);
             int actualCount = c.Capacity;
             //assert
-            Assert.AreEqual(inputValue, actualCount);
+            Assert.AreEqual(expectedCount, actualCount);
         }
 
         [TestMethod]
@@ -43,8 +44,9 @@ namespace CustomListUnitTests
             int inputValue = 5;
             //act
             c.Add(inputValue);
-            //assert
 
+            //assert
+            Assert.AreEqual(inputValue, c.Arr[0]);
         }
 
         [TestMethod]

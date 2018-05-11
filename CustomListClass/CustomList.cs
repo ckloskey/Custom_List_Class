@@ -7,40 +7,44 @@ using System.Threading.Tasks;
 
 namespace CustomListClass
 {
-    public class CustomList<T> : Enumerable
+    public class CustomList<T>
     {
-        //generic array
         private T[] arr;
         private T[] indexer = new T[100];
-
-        //capacity
         private int capacity;
         public CustomList()
         {
-            this.capacity = 5;
+            this.capacity = 0;
             arr = new T[capacity];
         }
 
         public T this[int capacity]
         {
-            get => indexer[capacity];
-            set => indexer[capacity] = value;
+            get
+            {
+                return indexer[capacity];
+            }
+
+            set
+            {
+                indexer[capacity] = value;
+            }
         }
 
         public int Capacity { get; set; }
         public T[] Arr { get => arr; set => arr = value; }
 
-        public void Add(T el)
+        public T[] Add(T newValue)
         {
-            int newCapacity = this.Capacity + 1;
-
-            for (int i = 0; i < this.Capacity; i++)
+            Capacity = Capacity + 1;
+            T[] newArr = new T[Capacity];
+            for (int i = 0; i < Arr.Length; i++)
             {
-                
-                arr[newCapacity] = el;
-
+                newArr[i] = arr[i];
             }
-
+            newArr[Capacity - 1] = newValue;
+            Arr = newArr;
+            return newArr;
         }
     }
 }
