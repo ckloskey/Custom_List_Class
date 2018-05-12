@@ -7,44 +7,78 @@ using System.Threading.Tasks;
 
 namespace CustomListClass
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable
     {
-        private T[] arr;
-        private T[] indexer = new T[100];
-        private int capacity;
+        public T[] arr;
+        public int capacity;
+        private int count;
+        int index;
         public CustomList()
         {
-            this.capacity = 0;
+            this.capacity = 5;
+            this.count = 0;
             arr = new T[capacity];
+            this.index = 0;
         }
 
-        public T this[int capacity]
+        public T this[int index]
         {
             get
             {
-                return indexer[capacity];
+                return arr[index];
+            }
+            set
+            {
+                arr[index] = value;
+            }
+        }
+
+        public int Capacity
+        {
+            get
+            {
+                return capacity;
             }
 
             set
             {
-                indexer[capacity] = value;
+                capacity = value;
             }
         }
 
-        public int Capacity { get; set; }
-        public T[] Arr { get => arr; set => arr = value; }
-
-        public T[] Add(T newValue)
+        public int Count
         {
-            Capacity = Capacity + 1;
-            T[] newArr = new T[Capacity];
-            for (int i = 0; i < Arr.Length; i++)
+            get
             {
-                newArr[i] = arr[i];
+                return count;
             }
-            newArr[Capacity - 1] = newValue;
-            Arr = newArr;
-            return newArr;
+            set
+            {
+                count = value;
+            }
         }
+
+        public void Add(T value)
+        {
+            if (index >= arr.Length)
+            {
+                Capacity++;
+                //resize array??
+               //throw new IndexOutOfRangeException($"The collection can hold only {arr.Length} elements.");
+            }
+            arr[index] = value;
+            Count++;
+            index++;
+        }
+        public void Remove(T value)
+        {
+
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
