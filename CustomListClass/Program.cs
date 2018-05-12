@@ -19,7 +19,10 @@ namespace CustomListClass
             customList.Add(2);
             customList.Add(3);
             customList.Add(1);
-            customList.Add(2);
+            //customList.Add(2);
+            //customList.Add(3);
+
+            customList.Remove(2);
         }
     }
 }

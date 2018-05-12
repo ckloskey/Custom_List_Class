@@ -54,13 +54,14 @@ namespace CustomListUnitTests
         {
             //arrange
             CustomList<int> c = new CustomList<int>();
-            int expectedCount = 5;
+            int expectedCount = 6;
             //act
             c.Add(1);
             c.Add(2);
             c.Add(3);
             c.Add(4);
             c.Add(5);
+            c.Add(6);
             int actualCount = c.Count;
             //assert
             Assert.AreEqual(expectedCount, actualCount);
@@ -75,7 +76,7 @@ namespace CustomListUnitTests
             //act
             c.Remove(inputValue);
             //assert
-            Assert.AreEqual(2, c.arr);
+            Assert.AreEqual(2, c.arr[0]);
         }
 
         [TestMethod]
@@ -87,13 +88,13 @@ namespace CustomListUnitTests
             CustomList<int> c = new CustomList<int>() { 1, 2, 3 }; 
             //act
             c.Remove(inputValue);
-            int actualResult = c.arr.Length;
+            int actualResult = c.Count;
             //assert
             Assert.AreEqual(expectedResult, actualResult);
         }
 
         [TestMethod]
-        public void Remove_ArrayCountStaysTheSame_()
+        public void Remove_ArrayCountStaysTheSame_ShouldNotEqual()
         {
             //arrange
             int inputValue = 1;
@@ -107,7 +108,8 @@ namespace CustomListUnitTests
         }
 
         [TestMethod]
-        public void Remove_DoesNotShiftIfElementDoesNotExist_()
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void Remove_DoesNotShiftIfElementDoesNotExist_ArrayShouldShift()
         {
             //arrange
             int inputValue = 4;
@@ -116,8 +118,17 @@ namespace CustomListUnitTests
             //act
             c.Remove(inputValue);
             //assert
-            Assert.AreEqual(expectedResult, c.arr);
         }
+
+        [TestMethod]
+        public void ToString_ElementsAreTypeString()
+        {
+            //arrange
+            //act
+            //assert
+        }
+
+
 
 
     }

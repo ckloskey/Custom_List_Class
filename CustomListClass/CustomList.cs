@@ -55,25 +55,59 @@ namespace CustomListClass
             set
             {
                 count = value;
+                if (count >= (Capacity / 2))
+                {
+                    ResizeArray();
+                }
             }
         }
 
         public void Add(T value)
         {
-            if (index >= arr.Length)
-            {
-                Capacity++;
-                //resize array??
-               //throw new IndexOutOfRangeException($"The collection can hold only {arr.Length} elements.");
-            }
             arr[index] = value;
             Count++;
             index++;
         }
         public void Remove(T value)
         {
+            int itemIndex = -1;
+            if (Count > 0)
+            { 
+                for (int i = 0; i < Count; i++)
+                {
+                    if (arr[i].Equals(value))
+                    {
+                        itemIndex = i;
+                        break;
+                    }
+                }
 
+                for (int i = itemIndex; i < Count; i++)
+                {
+                    arr[i] = arr[i + 1];
+                }
+
+                Count--;
+            }
         }
+        
+        public void ResizeArray()
+        {
+            Capacity = Capacity * 2;
+            T[] newArr = new T[capacity];
+            for(int i = 0; i < arr.Length; i++)
+            {
+                newArr[i] = arr[i];
+            }
+            
+            arr = newArr;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
 
         public IEnumerator GetEnumerator()
         {
