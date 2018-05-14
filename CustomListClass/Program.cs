@@ -23,6 +23,15 @@ namespace CustomListClass
             //customList.Add(3);
 
             customList.Remove(2);
+
+            Console.WriteLine(customList.ToString());
+
+            foreach(int el in customList)
+            {
+                Console.WriteLine(el);
+                
+            }
+            Console.ReadKey();
         }
     }
 }
