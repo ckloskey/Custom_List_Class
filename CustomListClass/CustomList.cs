@@ -140,7 +140,7 @@ namespace CustomListClass
         public static CustomList<T> operator - (CustomList<T> A, CustomList<T> B)
         {
             int index = A.Count - B.Count;
-            for (int i = index; i <= index + B.Count; i++)
+            for (int i = index; i < (index + B.Count); i++)
             {
                 A.RemoveAt(index);
             }
@@ -149,8 +149,14 @@ namespace CustomListClass
 
         public void Zipper(CustomList<T> B)
         {
-
+            int bIndex = Count - 1;
+            for (int index = Count - 1; index >= 0; index-- )
+            {
+                arr[(index * 2)] = arr[index];
+                arr[(index * 2) + 1] = B[bIndex];
+                bIndex--;
+            }
+            Count = Count * 2;
         }
-
     }
 }

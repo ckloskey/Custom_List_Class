@@ -250,21 +250,41 @@ namespace CustomListUnitTests
         {
             CustomList<int> c1 = new CustomList<int>() { 1, 3, 5 };
             CustomList<int> c2 = new CustomList<int>() { 2, 4, 6 };
-            CustomList<int> c3 = new CustomList<int>() { 1, 2, 3, 4, 5, 6 };
 
             c1.Zipper(c2);
 
-            Assert.AreEqual(c1, c3);
+            Assert.AreEqual(2, c1[1]);
         }
         [TestMethod]
         public void Zipper_SecondObjectStaysTheSame_()
         {
-            CustomList<int> c1 = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> c1 = new CustomList<int>() { 1, 3};
             CustomList<int> c2 = new CustomList<int>() { 2, 4, 6 };
 
             c1.Zipper(c2);
 
             Assert.AreEqual(2, c2[0]);
+        }
+
+        [TestMethod]
+        public void Zipper_DifferentLengths_LastIndexEqualsLastCorrespondingIndexOfSecondInstance()
+        {
+            CustomList<int> c1 = new CustomList<int>() { 1, 3 };
+            CustomList<int> c2 = new CustomList<int>() { 2, 4, 6 };
+
+            c1.Zipper(c2);
+
+            Assert.AreEqual(4, c1[3]);
+        }
+        [TestMethod]
+        public void Zipper_DifferentLengths_IndexAfterCountEqualsZero()
+        {
+            CustomList<int> c1 = new CustomList<int>() { 1, 3 };
+            CustomList<int> c2 = new CustomList<int>() { 2, 4, 6 };
+
+            c1.Zipper(c2);
+
+            Assert.AreEqual(0, c2[4]);
         }
 
     }

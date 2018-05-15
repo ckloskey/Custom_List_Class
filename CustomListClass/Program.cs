@@ -32,7 +32,13 @@ namespace CustomListClass
             customList = customList - customList2;
             Console.WriteLine(customList);
 
+            //customList.Zipper(customList2);
 
+            CustomList<int> customList3 = new CustomList<int>() { 1, 2, 3 };
+            CustomList<int> customList4 = new CustomList<int>() { 1, 2, 3, 4, 5 };
+
+            customList3.Zipper(customList4);
+            Console.WriteLine(customList3);
             Console.ReadKey();
         }
     }
