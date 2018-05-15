@@ -11,26 +11,28 @@ namespace CustomListClass
         static void Main(string[] args)
         {
             CustomList<int> customList = new CustomList<int>();
-            //for (int i = 1; i <= 3; i++)
-            //{
-            //    customList.Add(i);
-            //}
             customList.Add(1);
             customList.Add(2);
             customList.Add(3);
             customList.Add(1);
-            //customList.Add(2);
-            //customList.Add(3);
 
             customList.Remove(2);
 
-            Console.WriteLine(customList.ToString());
-
-            foreach(int el in customList)
+            foreach (int el in customList)
             {
                 Console.WriteLine(el);
-                
             }
+
+            Console.WriteLine(customList); //actually changed this to use this for testing purposes
+
+            CustomList<int> customList2 = new CustomList<int>() { 1, 2, 3 };
+            customList = customList + customList2;
+            Console.WriteLine(customList);
+
+            customList = customList - customList2;
+            Console.WriteLine(customList);
+
+
             Console.ReadKey();
         }
     }

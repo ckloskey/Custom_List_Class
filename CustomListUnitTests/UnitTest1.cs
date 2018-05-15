@@ -89,14 +89,14 @@ namespace CustomListUnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
+        
         public void AddOperator_TwoInstancesAreJoined_IndexOutOfRange()
         {
             CustomList<int> c1 = new CustomList<int>() { 1, 2, 3 };
             CustomList<int> c2 = new CustomList<int>() { 4, 5, 6 };
             CustomList<int> c3 = new CustomList<int>();
             c3 = c1 + c2;
-            int expectedOutOfRange = c3[6];
+            Assert.AreEqual(0, c3[6]);
         }
         [TestMethod]
         public void AddOperator_FirstIndexOfSecondInstanceDoesNotOverLapFirstInstance_()
@@ -133,39 +133,41 @@ namespace CustomListUnitTests
             Assert.AreNotEqual(collectionElements, maxCapacity);
         }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(IndexOutOfRangeException))]
-        //public void MinusOperator_SecondInstanceGetsRemoved_()
-        //{
-        //    CustomList<int> c1 = new CustomList<int>() { 1, 2, 3 };
-        //    CustomList<int> c2 = new CustomList<int>() { 4, 5, 6 };
-        //    CustomList<int> c3 = new CustomList<int>();
-        //    c3 = c1 + c2;
-        //    c3 = c1 - c2;
-        //    int result = c3[3];
-        //}
+        [TestMethod]
+        
+        public void MinusOperator_SecondInstanceGetsRemoved_()
+        {
+            CustomList<int> c1 = new CustomList<int>() { 1, 2, 3 };
+            CustomList<int> c2 = new CustomList<int>() { 4, 5, 6 };
+            CustomList<int> c3 = new CustomList<int>();
+            c3 = c1 + c2;
+            c3 = c3 - c2;
+            int result = c3[3];
+            Assert.AreEqual(0, result);
+        }
 
-        //[TestMethod]
-        //public void MinusOperator_CountEqualsFirstInstanceLength_()
-        //{
-        //    CustomList<int> c1 = new CustomList<int>() { 1, 2, 3 };
-        //    CustomList<int> c2 = new CustomList<int>() { 4, 5, 6 };
-        //    CustomList<int> c3 = new CustomList<int>();
-        //    c3 = c1 + c2;
-        //    c3 = c1 - c2;
-        //    Assert.AreEqual(c1.Count, c3.Count);
-        //}
+        [TestMethod]
+        public void MinusOperator_CountEqualsFirstInstanceLength_()
+        {
+            CustomList<int> c1 = new CustomList<int>() { 1, 2, 3 };
+            CustomList<int> c2 = new CustomList<int>() { 4, 5, 6 };
+            CustomList<int> c3 = new CustomList<int>();
+            c3 = c1 + c2;
+            c3 = c3 - c2;
+            Assert.AreEqual(c1.Count, c3.Count);
+        }
 
-        //[TestMethod]
-        //public void MinusOperator_ElementsOfSecondInstanceDoNotExistInResult_()
-        //{
-        //    CustomList<int> c1 = new CustomList<int>() { 1, 2, 3 };
-        //    CustomList<int> c2 = new CustomList<int>() { 4 };
-        //    CustomList<int> c3 = new CustomList<int>();
-        //    c3 = c1 + c2;
-        //    c3 = c1 - c2;
-        //    Assert.AreNotEqual(4, c3[0]);
-        //}
+        [TestMethod]
+
+        public void MinusOperator_ElementsOfSecondInstanceDoNotExistInResult_()
+        {
+            CustomList<int> c1 = new CustomList<int>() { 1, 2, 3 };
+            CustomList<int> c2 = new CustomList<int>() { 4 };
+            c1 = c1 + c2;
+            c1 = c1 - c2;
+            int result = c1[3];
+            Assert.AreNotEqual(4, result);
+        }
 
         [TestMethod]
         public void Remove_ElementGetsRemoved_()
@@ -226,9 +228,9 @@ namespace CustomListUnitTests
             //arrange
             CustomList<int> c = new CustomList<int>() { 1, 2, 3 };
             //act
-            c[1].ToString();
+            string result = c.ToString();
             //assert
-            Assert.AreEqual("Element 1: 2", c[1]);
+            Assert.AreEqual("Last Index 2 is 3", result);
         }
 
         [TestMethod]

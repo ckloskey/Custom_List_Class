@@ -64,9 +64,9 @@ namespace CustomListClass
 
         public void Add(T value)
         {
+            index = Count == 0 ? 0 : Count;
             arr[index] = value;
             Count++;
-            index++;
         }
 
         public int FindIndex(T value)
@@ -95,17 +95,21 @@ namespace CustomListClass
         {
             return GetEnumerator();
         }
-        public void Remove(T value)
+        public void RemoveAt(int index)
         {
             if (Count > 0)
             { 
-                for (int i = FindIndex(value); i < Count; i++)
+                for (int i = index; i < Count; i++)
                 {
                     arr[i] = arr[i + 1];
                 }
-
                 Count--;
             }
+        }
+
+        public void Remove(T value)
+        {
+            RemoveAt(FindIndex(value));
         }
         
         public void ResizeArray()
@@ -116,29 +120,31 @@ namespace CustomListClass
             {
                 newArr[i] = arr[i];
             }
-            
             arr = newArr;
         }
 
         public override string ToString()
         {
-            return string.Format("Last Index {0} is {1} ", this.index, arr[index].ToString());
+            return string.Format("Last Index {0} is {1}", Count - 1, arr[Count - 1].ToString());
         }
 
         public static CustomList<T> operator + (CustomList<T> A, CustomList<T> B)
         {
-            CustomList<T> result = new CustomList<T>();
-            result.Capacity = A.Capacity + B.Capacity;
-            result.Count = A.Count + B.Count;
-
-            return result;
+            foreach(T b in B)
+            {
+                A.Add(b);
+            }
+            return A;
         }
 
-        public static CustomList<T> operator - (CustomList<T> A)
+        public static CustomList<T> operator - (CustomList<T> A, CustomList<T> B)
         {
-            CustomList<T> result = new CustomList<T>();
-
-            return result;
+            int index = A.Count - B.Count;
+            for (int i = index; i <= index + B.Count; i++)
+            {
+                A.RemoveAt(index);
+            }
+            return A;
         }
 
         public void Zipper(CustomList<T> B)
