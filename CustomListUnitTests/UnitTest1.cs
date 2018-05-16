@@ -286,6 +286,5 @@ namespace CustomListUnitTests
 
             Assert.AreEqual(0, c2[4]);
         }
-
     }
 }

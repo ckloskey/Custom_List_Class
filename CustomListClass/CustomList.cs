@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomListClass
 {
-    public class CustomList<T> : IEnumerable <T>
+    public class CustomList<T> : IEnumerable <T> where T : IComparable
     {
         public T[] arr;
         public int capacity;
@@ -147,7 +144,7 @@ namespace CustomListClass
             return A;
         }
 
-        public void Zipper(CustomList<T> B)
+        public T [] Zipper(CustomList<T> B)
         {
             int bIndex = Count - 1;
             for (int index = Count - 1; index >= 0; index-- )
@@ -157,6 +154,7 @@ namespace CustomListClass
                 bIndex--;
             }
             Count = Count * 2;
+            return arr;
         }
     }
 }
